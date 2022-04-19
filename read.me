@@ -1,0 +1,27 @@
+201904051530 VANZ Schedule Extraction v1
+
+First release of the automated extraction from FlightAware through the FlightXML API.  Please be aware that this is a paid for per query API and the password contained in the creds.inc file when you're ready to pay the bill.
+
+FlightAware bills on the 18th of the month for the preceding months queries. 
+
+Steps to use:
+
+1. Use phpmyadmin to copy the nzva_template database to nzva_new
+2. Uncomment the flightxml password in creds.inc
+3. Change the date range being looked at in airlineflights.php
+4. run localhost/airlineflights.php - Should take about 45 minutes and return 33,000 flights in flightstemp table
+5. run localhost/shrinkdb.php - Should take about 5 minutes and return 4,000 flights in flightstemp table
+6. run localhost/citybuild.php - should take about 1 minute and return about 50 cities in locations table
+7. run localhost/time.php - should take about 5 minutes and return 500 flights in flightstemp table
+8. run buildflights - should take about 10 minutes and return 500 flights in flights table
+9. Comment out the flightxml password in creds.inc
+10. Export SQL and CSV from flights table using phpmyadmin for the actual DB
+11. Use phpmyadmin to rename the nzva_new database to nzva_YYYYMM
+
+To do:
+
+Build Interface Page:
+- Enter Start & End Date
+- Return results - affected rows for each step.
+
+Work out why Faa'a'a does not parse with escape strings 
